@@ -1,0 +1,22 @@
+.gridWrapper {
+    position: absolute;
+    width: calc(100vw - 160px);
+    max-height: calc(80vh - 160px);
+    overflow: auto;
+}
+
+
+.gridWrapper table thead tr th,
+.gridWrapper .k-table .k-table-row td {
+    text-align: start;
+}
+
+
+/* .gridWrapper table td[class~="k-selected"] {
+   background-color: rgba(138, 193, 224, 0.5) !important;
+  color: black;
+}
+.gridWrapper {
+  --k-marquee-color: rgba(138, 193, 224, 0.5) !important;
+} */
+
