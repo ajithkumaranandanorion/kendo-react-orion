@@ -2,11 +2,11 @@ import appstyle from "./modules/app.module.css"
 import GroupListComponent from "./component/GroupListComponent";
 import Header from "./layouts/header/Header";
 import Sidebar from "./layouts/sidebar/Sidebar";
-import { KendoProvider } from "./features/KendoContext";
+import { SelectedKendoProvider } from "./features/KendoContext";
 
 function App() {
   return (
-    <KendoProvider>
+    <SelectedKendoProvider>
     <div className={appstyle.appWrapper} >
         <header className={appstyle.header} ><Header/></header>
         <aside className={appstyle.sidebar} ><Sidebar/></aside>
@@ -14,7 +14,7 @@ function App() {
        <GroupListComponent/>
       </main>
     </div>
-    </KendoProvider>
+    </SelectedKendoProvider>
   )
 }
 

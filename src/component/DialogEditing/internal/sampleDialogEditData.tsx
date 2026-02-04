@@ -180,4 +180,3 @@ export const sampleEditProducts = [
         FirstOrderedOn: new Date(1996, 8, 5)
     }
 ];
-

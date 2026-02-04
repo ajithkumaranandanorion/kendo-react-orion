@@ -14,8 +14,16 @@ const DataFilterSearch = () => {
 
     const filterOperators: GridFilterOperators = {
 
-        text: [{ text: 'grid.filterContainsOperator', operator: 'contains' }, { text: 'grid.filterEqOperator', operator: 'eq' }],
-        numeric: [{ text: 'grid.filterEqOperator', operator: 'eq' }],
+        text: [{ text: 'grid.filterContainsOperator', operator: 'contains' },  { text: 'grid.filterNotContainsOperator', operator: 'doesnotcontain' },{ text: 'grid.filterEqOperator', operator: 'eq' },
+        { text: 'grid.filterNotEqOperator', operator: 'neq' },
+        { text: 'grid.filterStartsWithOperator', operator: 'startswith' },
+        { text: 'grid.filterEndsWithOperator', operator: 'endswith' },
+        { text: 'grid.filterIsNullOperator', operator: 'isnull' }],
+        numeric: [{ text: 'grid.filterEqOperator', operator: 'eq' }, { text: 'grid.filterNotEqOperator', operator: 'neq' },
+        { text: 'grid.filterGteOperator', operator: 'gte' },
+        { text: 'grid.filterGtOperator', operator: 'gt' },
+        { text: 'grid.filterLteOperator', operator: 'lte' },
+        { text: 'grid.filterLtOperator', operator: 'lt' }],
         date: [{ text: 'grid.filterEqOperator', operator: 'eq' }],
         boolean: [{ text: 'grid.filterEqOperator', operator: 'eq' }]
     };

@@ -1,14 +1,14 @@
 
-import {  useSelectedKendo } from "../../features/KendoContext";
+import { useSelectedKendo } from "../../features/KendoContext";
 
+export const kendoSidebarfieldList = ["simple", "selectable", "filtering", "pagination", "sorting", "editing", "inline editing", "dialog Editing", "external form"];
 
-function Sidebar() {    
-        const {selectedKendo, setSelectedKendo}=useSelectedKendo();
+function Sidebar() {
+    const { selectedKendo, setSelectedKendo } = useSelectedKendo();
 
     const handleSelect = (selected: string) => {
         setSelectedKendo(selected);
     }
-    const fieldList = ["simple", "selectable", "filtering", "pagination", "sorting", "editing"];
     const capitalizeFirst = (str: string) =>
         str ? str.split(" ").map((strItem: string) => {
             return strItem.charAt(0).toUpperCase() + strItem.slice(1) + " "
@@ -16,7 +16,7 @@ function Sidebar() {
     return (
         <div className="relative top-2 w-32">
             <ul role="listbox" className="absolute flex flex-col gap-1 mb-4">
-                {fieldList.map((item: string) => (
+                {kendoSidebarfieldList.map((item: string) => (
                     <li key={item} role="presentation">
                         <button
                             type="button"

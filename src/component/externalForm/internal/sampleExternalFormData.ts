@@ -1,4 +1,4 @@
-export const sampleEditProducts = [
+export const sampleExternalFormData = [
     {
         ProductID: 1,
         ProductName: 'Chai',
@@ -180,4 +180,3 @@ export const sampleEditProducts = [
         FirstOrderedOn: new Date(1996, 8, 5)
     }
 ];
-

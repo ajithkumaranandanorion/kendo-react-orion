@@ -88,7 +88,7 @@ function Editing() {
                         Cancel Changes
                     </Button>
                     <div className="ml-4 w-40">
-                        <Checkbox className="w-6 justify-start" defaultChecked={false} value={multiple} label={multiple ? 'Multiple Field Edit' : 'Single Field Edit'} onClick={handleCheckboxChange} />
+                        <Checkbox className="w-6 justify-start" defaultChecked={false} value={multiple} label={multiple ? 'Multiple Field Editing' : 'Single Field Editing'} onClick={handleCheckboxChange} />
 
                     </div>
                 </GridToolbar>

@@ -10,7 +10,7 @@ type SelectedKendoContextType = {
 
 export const SelectedKendoContext = createContext<SelectedKendoContextType | undefined>(undefined);
 
-export const KendoProvider = ({ children }: { children: React.ReactNode }) => {
+export const SelectedKendoProvider = ({ children }: { children: React.ReactNode }) => {
     const [selectedKendo, setSelectedKendo] = useState<string | null>("simple")
 
  const value: SelectedKendoContextType = { selectedKendo, setSelectedKendo };
