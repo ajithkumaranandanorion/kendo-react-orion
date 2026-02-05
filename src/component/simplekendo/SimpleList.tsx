@@ -1,6 +1,6 @@
 
 import { Grid, GridColumn } from '@progress/kendo-react-grid';
-import stylesimpleKendo from "../../modules/simplekendo.module.css"
+import stylesimpleKendo from "../../module-css/simplekendo.module.css"
 import "@progress/kendo-theme-default/dist/all.css"
 import { employees } from './internal/employees';
 export default function PlainList() {

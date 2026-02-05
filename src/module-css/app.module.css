@@ -1,24 +1,25 @@
 
 .appWrapper {        
         display: grid;
-        grid-template-columns: 9rem auto;
+        grid-template-columns: 9rem 1fr;
         grid-template-rows: 3rem auto;
         grid-template-areas:
-            "header header" "sidebar main"
+            "header header" 
+            "sidebar main"
     }
 
-    .main {
-        grid-area: main;
-        overflow: auto
-    }
-
-    .sidebar {
+   .sidebar {
         grid-area: sidebar;
         min-height: 92vh;
         color: aliceblue;
         margin-bottom:10px ;
         background-color: grey;
         width: 9rem;
+    }
+
+    .main {
+        grid-area: main;
+        overflow: auto;
     }
 
     .header {

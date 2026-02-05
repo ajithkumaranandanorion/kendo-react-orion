@@ -5,7 +5,7 @@ import {
     type GridFilterOperators
 } from '@progress/kendo-react-grid';
 import { process, type State, type DataResult } from '@progress/kendo-data-query';
-import dataBindingProducts from './internal/db-products';
+import { dataBindingProducts } from './internal/db-products';
 
 
 const DataFilterSearch = () => {
@@ -14,7 +14,7 @@ const DataFilterSearch = () => {
 
     const filterOperators: GridFilterOperators = {
 
-        text: [{ text: 'grid.filterContainsOperator', operator: 'contains' },  { text: 'grid.filterNotContainsOperator', operator: 'doesnotcontain' },{ text: 'grid.filterEqOperator', operator: 'eq' },
+        text: [{ text: 'grid.filterContainsOperator', operator: 'contains' }, { text: 'grid.filterNotContainsOperator', operator: 'doesnotcontain' }, { text: 'grid.filterEqOperator', operator: 'eq' },
         { text: 'grid.filterNotEqOperator', operator: 'neq' },
         { text: 'grid.filterStartsWithOperator', operator: 'startswith' },
         { text: 'grid.filterEndsWithOperator', operator: 'endswith' },

@@ -1,6 +1,6 @@
 import  { useState } from 'react';
 import { Grid, GridColumn, type GridEditChangeEvent, type GridSelectableSettings } from '@progress/kendo-react-grid';
-import stylesimpleKendo from "../../modules/simplekendo.module.css"
+import stylesimpleKendo from "../../module-css/simplekendo.module.css"
 import "@progress/kendo-theme-default/dist/all.css"
 import { customTitleCell } from './internal/customCell';
 import { type EditDescriptor, type TableSelectableMode } from '@progress/kendo-react-data-tools';

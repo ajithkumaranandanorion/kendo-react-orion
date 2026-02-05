@@ -1,6 +1,6 @@
 
 import { Grid, GridColumn, GridToolbar, type GridEditChangeEvent, type GridItemChangeEvent } from "@progress/kendo-react-grid";
-import sampleEditProducts from "./internal/sampleEditingData";
+import {sampleEditProducts} from "./internal/sampleEditingData";
 import { ColumnMenu, CustomDataCell } from "./internal/customDataCell";
 import { useState } from "react";
 import { type EditDescriptor } from '@progress/kendo-react-data-tools';

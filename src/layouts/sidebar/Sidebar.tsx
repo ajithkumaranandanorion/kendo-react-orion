@@ -1,7 +1,7 @@
 
 import { useSelectedKendo } from "../../features/KendoContext";
 
-export const kendoSidebarfieldList = ["simple", "selectable", "filtering", "pagination", "sorting", "editing", "inline editing", "dialog Editing", "external form"];
+export const kendoSidebarfieldList = ["simple", "selectable", "filtering", "pagination", "sorting", "editing", "inline editing", "dialog Editing", "external form","exporting"];
 
 function Sidebar() {
     const { selectedKendo, setSelectedKendo } = useSelectedKendo();
@@ -14,8 +14,8 @@ function Sidebar() {
             return strItem.charAt(0).toUpperCase() + strItem.slice(1) + " "
         }) : ""
     return (
-        <div className="relative top-2 w-32">
-            <ul role="listbox" className="absolute flex flex-col gap-1 mb-4">
+        <div className="relative top-2">
+            <ul role="listbox" className="absolute flex flex-col gap-1">
                 {kendoSidebarfieldList.map((item: string) => (
                     <li key={item} role="presentation">
                         <button
@@ -23,7 +23,7 @@ function Sidebar() {
                             role="option"
                             aria-selected={selectedKendo === item}
                             onClick={() => handleSelect(item)}
-                            className={`block w-[9rem] text-left p-1 mb-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 rounded-sm 
+                            className={`block w-[9rem] text-left p-1 mb-1 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 rounded-sm 
             ${selectedKendo === item ? "bg-blue-700 text-white" : "bg-transparent hover:bg-blue-50 hover:text-black"}`}
                         >
                             {capitalizeFirst(item)}

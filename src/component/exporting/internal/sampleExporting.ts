@@ -1,4 +1,4 @@
-export const dataBindingProducts = [
+export const sampleProductsExporting = [
     {
         ProductID: 1,
         ProductName: 'Chai',

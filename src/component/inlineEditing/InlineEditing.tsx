@@ -1,11 +1,11 @@
 
 import { Grid, GridColumn, GridToolbar, type GridItemChangeEvent } from "@progress/kendo-react-grid";
-import sampleEditProducts from "./internal/sampleEditingData";
+import { sampleEditProducts } from "./internal/sampleEditingData";
 import { MyCommandCell } from "./internal/customDataCell";
 import { useState } from "react";
 import { type EditDescriptor } from '@progress/kendo-react-data-tools';
 import { Button } from "@progress/kendo-react-buttons";
-import {  deleteItem, generateId, getItems, insertItem, updateItem } from "./internal/crudService";
+import { deleteItem, generateId, getItems, insertItem, updateItem } from "./internal/crudService";
 
 
 export interface Product {
@@ -14,7 +14,7 @@ export interface Product {
     FirstOrderedOn?: Date;
     UnitsInStock?: number;
     Discontinued?: boolean;
-    new?:boolean
+    new?: boolean
 }
 
 
@@ -67,27 +67,27 @@ function InlineEditing() {
     }
 
     //Add field 
-   const addNew = () => {
-    const newDataItem = {
-      ProductID: generateId(editData),
-      Discontinued: false,
-      new: true
+    const addNew = () => {
+        const newDataItem = {
+            ProductID: generateId(editData),
+            Discontinued: false,
+            new: true
+        };
+        setEditData([newDataItem, ...editData]);
+        setEdit(edit => ({
+            ...edit,
+            [newDataItem.ProductID]: true
+        }));
     };
-    setEditData([newDataItem, ...editData]);
-    setEdit(edit => ({
-      ...edit,
-      [newDataItem.ProductID]: true
-    }));
-  };
 
     const add = (dataItem: Product) => {
-         dataItem.new = false;
-    insertItem(dataItem);
-    setEdit(edit => ({
-      ...edit,
-      [dataItem.ProductID]: false
-    }));
-     }
+        dataItem.new = false;
+        insertItem(dataItem);
+        setEdit(edit => ({
+            ...edit,
+            [dataItem.ProductID]: false
+        }));
+    }
 
     const commandCellProps = {
         edit: edit,
@@ -120,8 +120,8 @@ function InlineEditing() {
                 <GridColumn field="Discontinued" title="Discontinued" editor="boolean" />
                 <GridColumn cells={{
                     data: props => <MyCommandCell {...props} {...commandCellProps} />
-                }} width="200px" />      
-                </Grid>
+                }} width="200px" />
+            </Grid>
         </div>
     )
 }
