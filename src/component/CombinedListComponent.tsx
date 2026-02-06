@@ -1,9 +1,12 @@
 
 import { lazy, Suspense } from 'react';
 import { useSelectedKendo } from '../features/KendoContext';
+import Loader from '../utils/SpinnerComponent';
+import Aggregategrouping from './aggregategrouping/Aggregategrouping';
+import ColumnRow from './columnRow/ColumnRow';
+import TreeListComponent from './treeList/TreeList';
 
-
-const Pagination = lazy(() => import('./paging/Pagination'));
+const Pagination = lazy(() => import('./pagination/Pagination'));
 const SortingComponent = lazy(() => import('./sorting/SortingComponent'));
 const Editing = lazy(() => import('./editing/Editing'));
 const InlineEditing = lazy(() => import('./inlineEditing/InlineEditing'));
@@ -12,7 +15,8 @@ const ExternalForm = lazy(() => import('./externalForm/ExternalForm'));
 const PlainList = lazy(() => import('./simplekendo/SimpleList'));
 const SelectableList = lazy(() => import('./selectable/SelectableLIst'));
 const DataFilterSearch = lazy(() => import('./dataFilterSearch/DataFilterSearch'));
-
+const Exporting = lazy(() => import('./exporting/Exporting'));
+const Grouping = lazy(() => import('./grouping/Grouping'));
 
 function CombinedListComponent() {
     const { selectedKendo } = useSelectedKendo();
@@ -37,13 +41,23 @@ function CombinedListComponent() {
                 return <FormDialogEditing />
             case "external form":
                 return <ExternalForm />
+            case "exporting":
+                return <Exporting />
+            case "grouping":
+                return <Grouping />
+            case "agg grouping":
+                return <Aggregategrouping />
+            case "column row":
+                return <ColumnRow />
+            case "tree list":
+                return <TreeListComponent />
             default:
                 break;
         }
     }
     return (
         <div className='m-4'>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<div><Loader /></div>}>
                 {groupListRenderComponent()}
             </Suspense>
         </div>

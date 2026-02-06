@@ -1,7 +1,7 @@
 
 import { useSelectedKendo } from "../../features/KendoContext";
 
-export const kendoSidebarfieldList = ["simple", "selectable", "filtering", "pagination", "sorting", "editing", "inline editing", "dialog Editing", "external form","exporting"];
+export const kendoSidebarfieldList = ["simple", "selectable", "filtering", "pagination", "sorting", "editing", "inline editing", "dialog Editing", "external form", "exporting", "grouping", "agg grouping","column row","tree list"];
 
 function Sidebar() {
     const { selectedKendo, setSelectedKendo } = useSelectedKendo();

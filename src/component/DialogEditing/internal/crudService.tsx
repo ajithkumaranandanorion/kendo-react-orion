@@ -1,11 +1,8 @@
 
-import type { Product } from "../DialogEditing";
-import { sampleEditProducts } from "./sampleDialogEditData";
-
+import type { Product } from "../../editing/Editing";
+import { sampleEditProducts } from "../../editing/internal/sampleEditingData";
 
 const data = [...sampleEditProducts];
-
-export const generateId = (data: Product[]) => data.reduce((acc: number, current: Product) => Math.max(acc, current.ProductID), 0) + 1;
 
 export const insertItem = (item: any) => {
     data.unshift(item);

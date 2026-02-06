@@ -22,6 +22,7 @@
     "@progress/kendo-react-inputs": "^13.3.0",
     "@progress/kendo-react-labels": "^13.3.0",
     "@progress/kendo-react-pdf": "^13.3.0",
+    "@progress/kendo-react-treelist": "^13.3.0",
     "@progress/kendo-theme-default": "^12.3.0",
     "@tailwindcss/vite": "^4.1.18",
     "i": "^0.3.7",

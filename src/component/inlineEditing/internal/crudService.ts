@@ -1,8 +1,8 @@
+import { sampleEditProductList } from "../../editing/internal/sampleEditingData";
 import type { Product } from "../InlineEditing";
-import { sampleEditProducts } from "./sampleEditingData";
 
 
-const data = [...sampleEditProducts];
+const data = [...sampleEditProductList];
 
 export const generateId = (data: Product[]) => data.reduce((acc: number, current: Product) => Math.max(acc, current.ProductID), 0) + 1;
 

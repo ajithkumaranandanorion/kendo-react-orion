@@ -1,11 +1,11 @@
 
 import { Grid, GridColumn, GridToolbar, type GridItemChangeEvent } from "@progress/kendo-react-grid";
-import { sampleEditProducts } from "./internal/sampleEditingData";
 import { MyCommandCell } from "./internal/customDataCell";
 import { useState } from "react";
 import { type EditDescriptor } from '@progress/kendo-react-data-tools';
 import { Button } from "@progress/kendo-react-buttons";
 import { deleteItem, generateId, getItems, insertItem, updateItem } from "./internal/crudService";
+import { sampleEditProductList } from "../editing/internal/sampleEditingData";
 
 
 export interface Product {
@@ -19,7 +19,7 @@ export interface Product {
 
 
 function InlineEditing() {
-    const [editData, setEditData] = useState<Array<Product>>(sampleEditProducts || []);
+    const [editData, setEditData] = useState<Array<Product>>(sampleEditProductList || []);
     const [edit, setEdit] = useState<EditDescriptor>({});
 
     const handleItemChange = (e: GridItemChangeEvent) => {

@@ -1,4 +1,4 @@
-export const sampleEditProducts = [
+export const sampleEditProductList = [
     {
         ProductID: 1,
         ProductName: 'Chai',

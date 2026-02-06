@@ -1,26 +1,17 @@
 
 import { Grid, GridColumn, GridToolbar, type GridEditChangeEvent, type GridItemChangeEvent, type GridRowClickEvent } from "@progress/kendo-react-grid";
-import { sampleEditProducts } from "./internal/sampleDialogEditData";
 import { useState } from "react";
 import { type EditDescriptor } from '@progress/kendo-react-data-tools';
 import { Button } from "@progress/kendo-react-buttons";
-import { generateId } from "./internal/crudService";
+import { sampleEditProductList } from "../editing/internal/sampleEditingData";
+import { generateId } from "../inlineEditing/internal/crudService";
+import type { Product } from "../editing/Editing";
 import { NameCell, NameEditCell } from "./internal/customDialogCell";
-
-
-export interface Product {
-    ProductID: number;
-    ProductName?: string;
-    FirstOrderedOn?: Date;
-    UnitsInStock?: number;
-    Discontinued?: boolean;
-    new?: boolean
-}
 
 const DATA_ITEM_KEY = 'ProductID';
 
 function FormDialogEditing() {
-    const [editData, setEditData] = useState<Array<Product>>(sampleEditProducts || []);
+    const [editData, setEditData] = useState<Array<Product>>(sampleEditProductList || []);
     const [edit, setEdit] = useState<EditDescriptor>({});
 
     const handleItemChange = (e: GridItemChangeEvent) => {

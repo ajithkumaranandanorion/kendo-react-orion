@@ -1,11 +1,11 @@
-export const sampleEditProducts = [
+export const productsList = [
     {
         ProductID: 1,
         ProductName: 'Chai',
         SupplierID: 1,
         CategoryID: 1,
         QuantityPerUnit: '10 boxes x 20 bags',
-        UnitPrice: 18,
+        UnitPrice: 18.0,
         UnitsInStock: 39,
         UnitsOnOrder: 0,
         ReorderLevel: 10,
@@ -14,8 +14,7 @@ export const sampleEditProducts = [
             CategoryID: 1,
             CategoryName: 'Beverages',
             Description: 'Soft drinks, coffees, teas, beers, and ales'
-        },
-        FirstOrderedOn: new Date(1996, 8, 20)
+        }
     },
     {
         ProductID: 2,
@@ -23,7 +22,7 @@ export const sampleEditProducts = [
         SupplierID: 1,
         CategoryID: 1,
         QuantityPerUnit: '24 - 12 oz bottles',
-        UnitPrice: 19,
+        UnitPrice: 19.0,
         UnitsInStock: 17,
         UnitsOnOrder: 40,
         ReorderLevel: 25,
@@ -32,8 +31,7 @@ export const sampleEditProducts = [
             CategoryID: 1,
             CategoryName: 'Beverages',
             Description: 'Soft drinks, coffees, teas, beers, and ales'
-        },
-        FirstOrderedOn: new Date(1996, 7, 12)
+        }
     },
     {
         ProductID: 3,
@@ -41,7 +39,7 @@ export const sampleEditProducts = [
         SupplierID: 1,
         CategoryID: 2,
         QuantityPerUnit: '12 - 550 ml bottles',
-        UnitPrice: 10,
+        UnitPrice: 10.0,
         UnitsInStock: 13,
         UnitsOnOrder: 70,
         ReorderLevel: 25,
@@ -50,8 +48,7 @@ export const sampleEditProducts = [
             CategoryID: 2,
             CategoryName: 'Condiments',
             Description: 'Sweet and savory sauces, relishes, spreads, and seasonings'
-        },
-        FirstOrderedOn: new Date(1996, 8, 26)
+        }
     },
     {
         ProductID: 4,
@@ -59,7 +56,7 @@ export const sampleEditProducts = [
         SupplierID: 2,
         CategoryID: 2,
         QuantityPerUnit: '48 - 6 oz jars',
-        UnitPrice: 22,
+        UnitPrice: 22.0,
         UnitsInStock: 53,
         UnitsOnOrder: 0,
         ReorderLevel: 0,
@@ -68,8 +65,7 @@ export const sampleEditProducts = [
             CategoryID: 2,
             CategoryName: 'Condiments',
             Description: 'Sweet and savory sauces, relishes, spreads, and seasonings'
-        },
-        FirstOrderedOn: new Date(1996, 9, 19)
+        }
     },
     {
         ProductID: 5,
@@ -86,8 +82,7 @@ export const sampleEditProducts = [
             CategoryID: 2,
             CategoryName: 'Condiments',
             Description: 'Sweet and savory sauces, relishes, spreads, and seasonings'
-        },
-        FirstOrderedOn: new Date(1996, 7, 17)
+        }
     },
     {
         ProductID: 6,
@@ -95,7 +90,7 @@ export const sampleEditProducts = [
         SupplierID: 3,
         CategoryID: 2,
         QuantityPerUnit: '12 - 8 oz jars',
-        UnitPrice: 25,
+        UnitPrice: 25.0,
         UnitsInStock: 120,
         UnitsOnOrder: 0,
         ReorderLevel: 25,
@@ -104,8 +99,7 @@ export const sampleEditProducts = [
             CategoryID: 2,
             CategoryName: 'Condiments',
             Description: 'Sweet and savory sauces, relishes, spreads, and seasonings'
-        },
-        FirstOrderedOn: new Date(1996, 9, 19)
+        }
     },
     {
         ProductID: 7,
@@ -113,7 +107,7 @@ export const sampleEditProducts = [
         SupplierID: 3,
         CategoryID: 7,
         QuantityPerUnit: '12 - 1 lb pkgs.',
-        UnitPrice: 30,
+        UnitPrice: 30.0,
         UnitsInStock: 15,
         UnitsOnOrder: 0,
         ReorderLevel: 10,
@@ -122,8 +116,7 @@ export const sampleEditProducts = [
             CategoryID: 7,
             CategoryName: 'Produce',
             Description: 'Dried fruit and bean curd'
-        },
-        FirstOrderedOn: new Date(1996, 7, 22)
+        }
     },
     {
         ProductID: 8,
@@ -131,7 +124,7 @@ export const sampleEditProducts = [
         SupplierID: 3,
         CategoryID: 2,
         QuantityPerUnit: '12 - 12 oz jars',
-        UnitPrice: 40,
+        UnitPrice: 40.0,
         UnitsInStock: 6,
         UnitsOnOrder: 0,
         ReorderLevel: 0,
@@ -140,8 +133,7 @@ export const sampleEditProducts = [
             CategoryID: 2,
             CategoryName: 'Condiments',
             Description: 'Sweet and savory sauces, relishes, spreads, and seasonings'
-        },
-        FirstOrderedOn: new Date(1996, 11, 1)
+        }
     },
     {
         ProductID: 9,
@@ -149,7 +141,7 @@ export const sampleEditProducts = [
         SupplierID: 4,
         CategoryID: 6,
         QuantityPerUnit: '18 - 500 g pkgs.',
-        UnitPrice: 97,
+        UnitPrice: 97.0,
         UnitsInStock: 29,
         UnitsOnOrder: 0,
         ReorderLevel: 0,
@@ -158,8 +150,7 @@ export const sampleEditProducts = [
             CategoryID: 6,
             CategoryName: 'Meat/Poultry',
             Description: 'Prepared meats'
-        },
-        FirstOrderedOn: new Date(1997, 1, 21)
+        }
     },
     {
         ProductID: 10,
@@ -167,7 +158,7 @@ export const sampleEditProducts = [
         SupplierID: 4,
         CategoryID: 8,
         QuantityPerUnit: '12 - 200 ml jars',
-        UnitPrice: 31,
+        UnitPrice: 31.0,
         UnitsInStock: 31,
         UnitsOnOrder: 0,
         ReorderLevel: 0,
@@ -176,7 +167,22 @@ export const sampleEditProducts = [
             CategoryID: 8,
             CategoryName: 'Seafood',
             Description: 'Seaweed and fish'
-        },
-        FirstOrderedOn: new Date(1996, 8, 5)
-    }
-];
+        }
+    },
+    {
+        ProductID: 11,
+        ProductName: 'Queso Cabrales',
+        SupplierID: 5,
+        CategoryID: 4,
+        QuantityPerUnit: '1 kg pkg.',
+        UnitPrice: 21.0,
+        UnitsInStock: 22,
+        UnitsOnOrder: 30,
+        ReorderLevel: 30,
+        Discontinued: false,
+        Category: {
+            CategoryID: 4,
+            CategoryName: 'Dairy Products',
+            Description: 'Cheeses'
+        }
+    }]

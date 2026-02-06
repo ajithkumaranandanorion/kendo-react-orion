@@ -1,11 +1,11 @@
 
 import { Grid, GridColumn, GridToolbar, type GridEditChangeEvent, type GridItemChangeEvent } from "@progress/kendo-react-grid";
-import {sampleEditProducts} from "./internal/sampleEditingData";
 import { ColumnMenu, CustomDataCell } from "./internal/customDataCell";
 import { useState } from "react";
 import { type EditDescriptor } from '@progress/kendo-react-data-tools';
 import { Button } from "@progress/kendo-react-buttons";
 import { Checkbox } from "@progress/kendo-react-inputs";
+import { sampleEditProductList } from "./internal/sampleEditingData";
 
 export interface Product {
     ProductID: number;
@@ -18,8 +18,8 @@ export interface Product {
 // Editable all field
 const allInEdit = () => {
     let result = {} as Record<Product["ProductID"], string[]>;
-    const editedColumns = Object.keys(sampleEditProducts[0]);
-    sampleEditProducts.forEach((product) => {
+    const editedColumns = Object.keys(sampleEditProductList[0]);
+    sampleEditProductList.forEach((product:any) => {
         result[product.ProductID] = editedColumns;
     });
     return result;
@@ -28,7 +28,7 @@ const allInEdit = () => {
 
 function Editing() {
     // const initialSort: SortDescriptor[] = [{ field: 'ProductName', dir: 'asc' }];
-    const [editData, setEditData] = useState<Array<Product>>(sampleEditProducts || []);
+    const [editData, setEditData] = useState<Array<Product>>(sampleEditProductList || []);
     const [changes, setChanges] = useState<boolean>(false);
     const [edit, setEdit] = useState<EditDescriptor>({});
     const [multiple, setmultiple] = useState<boolean>(false);
@@ -42,7 +42,7 @@ function Editing() {
 
     const cancelChanges = () => {
         setChanges(false);
-        setEditData(sampleEditProducts);
+        setEditData(sampleEditProductList);
         !multiple && setEdit({});
     };
 
