@@ -24,4 +24,5 @@ export interface AppState {
     data: Employee[];
     dataState: DataState;
     expanded: number[];
+    editId?: number | null;
 }
