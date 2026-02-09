@@ -1,10 +1,7 @@
-
 import { lazy, Suspense } from 'react';
 import { useSelectedKendo } from '../features/KendoContext';
 import Loader from '../utils/SpinnerComponent';
-import Aggregategrouping from './aggregategrouping/Aggregategrouping';
 import ColumnRow from './columnRow/ColumnRow';
-import TreeListComponent from './treeList/TreeList';
 
 const Pagination = lazy(() => import('./pagination/Pagination'));
 const SortingComponent = lazy(() => import('./sorting/SortingComponent'));
@@ -17,6 +14,10 @@ const SelectableList = lazy(() => import('./selectable/SelectableLIst'));
 const DataFilterSearch = lazy(() => import('./dataFilterSearch/DataFilterSearch'));
 const Exporting = lazy(() => import('./exporting/Exporting'));
 const Grouping = lazy(() => import('./grouping/Grouping'));
+const Aggregategrouping = lazy(() => import('./aggregategrouping/Aggregategrouping'));
+const TreeListComponent = lazy(() => import('./treeList/TreeList'));
+const TreeListPagination = lazy(() => import('./treeListPagination/treeListPagination'));
+const TreeListEditing = lazy(() => import('./treeListEditing/TreeListEditing'));
 
 function CombinedListComponent() {
     const { selectedKendo } = useSelectedKendo();
@@ -49,12 +50,18 @@ function CombinedListComponent() {
                 return <Aggregategrouping />
             case "column row":
                 return <ColumnRow />
+            //below is Tree list
             case "tree list":
                 return <TreeListComponent />
+            case "pagination list":
+                return <TreeListPagination />
+            case "tree Editing":
+                return <TreeListEditing />
             default:
                 break;
         }
     }
+
     return (
         <div className='m-4'>
             <Suspense fallback={<div><Loader /></div>}>

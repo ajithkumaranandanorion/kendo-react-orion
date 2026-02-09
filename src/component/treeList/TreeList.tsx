@@ -1,10 +1,27 @@
-import { extendDataItem, filterBy, mapTree, orderBy, TreeList, TreeListBooleanEditor, TreeListDateEditor, TreeListNumericEditor, TreeListTextEditor, type TreeListColumnProps, type TreeListDataStateChangeEvent, type TreeListExpandChangeEvent, type TreeListItemChangeEvent, type TreeListRowClickEvent } from '@progress/kendo-react-treelist';
+import { extendDataItem, filterBy, mapTree, orderBy, TreeList, TreeListBooleanEditor, TreeListDateEditor, TreeListNumericEditor, TreeListTextEditor, TreeListTextFilter, type TreeListColumnProps, type TreeListDataStateChangeEvent, type TreeListExpandChangeEvent, type TreeListFilterChangeEvent, type TreeListItemChangeEvent, type TreeListRowClickEvent } from '@progress/kendo-react-treelist';
 import { employeesTreeList } from './internal/employeeTreeData';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { AppState, DataState, Employee } from './internal/interface';
 const subItemsField: string = 'employees';
 const expandField: string = 'expanded';
 const editField: string = 'inEdit';
+
+// import type { GridFilterOperators } from '@progress/kendo-react-grid';
+// const filterOperators: GridFilterOperators = {
+//   text: [{ text: 'grid.filterContainsOperator', operator: 'contains' }, { text: 'grid.filterNotContainsOperator', operator: 'doesnotcontain' }, { text: 'grid.filterEqOperator', operator: 'eq' },
+//   { text: 'grid.filterNotEqOperator', operator: 'neq' },
+//   { text: 'grid.filterStartsWithOperator', operator: 'startswith' },
+//   { text: 'grid.filterEndsWithOperator', operator: 'endswith' },
+//   { text: 'grid.filterIsNullOperator', operator: 'isnull' }],
+//   numeric: [{ text: 'grid.filterEqOperator', operator: 'eq' }, { text: 'grid.filterNotEqOperator', operator: 'neq' },
+//   { text: 'grid.filterGteOperator', operator: 'gte' },
+//   { text: 'grid.filterGtOperator', operator: 'gt' },
+//   { text: 'grid.filterLteOperator', operator: 'lte' },
+//   { text: 'grid.filterLtOperator', operator: 'lt' }],
+//   date: [{ text: 'grid.filterEqOperator', operator: 'eq' }],
+//   boolean: [{ text: 'grid.filterEqOperator', operator: 'eq' }]
+// };
+// const MyDropDownFilter = (props: any) => <DropDownFilter {...props} data={dropDownData} defaultItem="Select Position" />;
 
 function TreeListComponent() {
 
@@ -18,13 +35,13 @@ function TreeListComponent() {
     editId: null,
   });
 
-  // useEffect(()=>{
-  //   console.log("state",state);    
-  // },[state])
+  useEffect(() => {
+    console.log("state", state);
+  }, [state])
 
   //editCell  TreeListBooleanFilter, TreeListNumericFilter,TreeListDateFilter 
   const columns: TreeListColumnProps[] = [
-    { field: 'name', title: 'Name', width: '280px',  expandable: true,  editCell: TreeListTextEditor},
+    { field: 'name', title: 'Name', width: '280px', expandable: true, editCell: TreeListTextEditor, filterCell: TreeListTextFilter },
     { field: 'position', title: 'Position', width: '260px', editCell: TreeListTextEditor },
     { field: 'hireDate', title: 'Hire Date', format: '{0:d}', width: '170px', editCell: TreeListDateEditor },
     { field: 'timeInPosition', title: 'Year(s) in Position', width: '170px', editCell: TreeListNumericEditor },
@@ -80,11 +97,16 @@ function TreeListComponent() {
   }
 
   const rowClick = (e: TreeListRowClickEvent) => {
-    console.log(e)
     setState({
       ...state,
       editId: state.editId === e.dataItem.id ? null : e.dataItem.id
     });
+  };
+
+  //Filter 
+  const handleFilterChange = (e: TreeListFilterChangeEvent) => {
+    const updateFilter = { ...state.dataState, filter: e.filter }
+    setState({ ...state, ...updateFilter });
   };
 
   return (
@@ -93,8 +115,8 @@ function TreeListComponent() {
       expandField={expandField}
       subItemsField={subItemsField}
       onExpandChange={onExpandChange}
-      // sortable={{ mode: 'multiple' }}
-      sortable={true}
+      sortable={{ mode: 'multiple' }}
+      // sortable={true}
       {...state.dataState}
       data={processData()}
       onDataStateChange={handleDataStateChange}
@@ -103,7 +125,11 @@ function TreeListComponent() {
       editField={editField}
       resizable={true}
       onRowClick={rowClick}
-    /></div>
+      // filterOperators={filterOperators}
+      filter={state.dataState.filter}
+      onFilterChange={handleFilterChange}
+    />
+    </div>
   )
 }
 
