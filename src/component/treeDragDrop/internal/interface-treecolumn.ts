@@ -1,4 +1,4 @@
-import type { FilterDescriptor, SortDescriptor } from "@progress/kendo-data-query";
+import { FilterDescriptor, SortDescriptor } from "@progress/kendo-data-query";
 
 export interface Employee {
     id: number,
@@ -20,14 +20,14 @@ export interface DataState {
     filter: FilterDescriptor[]
 }
 
-export interface AppState {
-    data: Employee[];
-    editId: number | null;
-    expanded: number[];
-    editItem: Employee | undefined;
-    editItemField: string | undefined;
-    changes: boolean;
-    inEdit: Array<{
-        id: number; isNew: boolean
-    }>
+export interface EmployeesFlat {
+    id: number,
+    name: string,
+    reportsTo: null | number,
+    phone: string,
+    extension: number,
+    hireDate: Date,
+    fullTime: boolean,
+    position: string,
+    timeInPosition: number,
 }

@@ -1,47 +1,93 @@
-import { extendDataItem, mapTree, TreeList, TreeListBooleanEditor, TreeListDateEditor, TreeListNumericEditor, TreeListTextEditor, TreeListTextFilter, TreeListToolbar, type TreeListColumnProps, type TreeListDataStateChangeEvent, type TreeListExpandChangeEvent, type TreeListItemChangeEvent, type TreeListRowClickEvent } from '@progress/kendo-react-treelist';
+import * as React from 'react';
+import {
+  TreeList,
+  TreeListToolbar,
+  mapTree,
+  extendDataItem,
+  removeItems,
+  modifySubItems,
+  TreeListColumnProps,
+  TreeListTextEditor,
+  TreeListBooleanEditor,
+  TreeListItemChangeEvent,
+  TreeListExpandChangeEvent
+} from '@progress/kendo-react-treelist';
+import { Button } from '@progress/kendo-react-buttons';
+import { Employee } from './internal/interface';
 import { employeesTreeList } from './internal/employeeTreeData';
-import { useState } from 'react';
-import type { AppState, DataState, Employee } from './internal/interface';
+import MyCommandCell from './internal/commandCell';
+
 const subItemsField: string = 'employees';
 const expandField: string = 'expanded';
 const editField: string = 'inEdit';
-import { Button } from '@progress/kendo-react-buttons';
-import { createRenderers } from './internal/cellrender';
 
-function TreeListEditing() {
-  let renderers;
+interface AppState {
+  data: Employee[];
+  expanded: number[];
+  inEdit: Array<{ id: number; isNew: boolean }>;
+}
 
-  const [state, setState] = useState<AppState>({
-    data: [...employeesTreeList],
+const TreeListEditing = () => {
+  const [state, setState] = React.useState<AppState>({
+    data: employeesTreeList.slice(),
     expanded: [1, 2, 32],
-    editId: null,
-    editItem: undefined,
-    editItemField: undefined,
-    changes: false
+    inEdit: []
   });
 
-  const saveChanges = () => {
-    employeesTreeList.splice(0, employeesTreeList.length, ...state.data);
+  const addChild = (dataItem: Employee) => {
+    const newRecord = createNewItem();
+
     setState({
       ...state,
-      editItem: undefined,
-      editItemField: undefined,
-      changes: false
+      inEdit: [...state.inEdit, newRecord],
+      expanded: [...state.expanded, dataItem.id],
+      data: modifySubItems(
+        state.data,
+        subItemsField,
+        (item) => item.id === dataItem.id,
+        (subItems) => [newRecord, ...subItems]
+      )
     });
   };
 
-  // useEffect(() => {
-  //   console.log("state", state);
-  // }, [state])
+  const enterEdit = (dataItem: Employee) => {
+    setState({
+      ...state,
+      inEdit: [...state.inEdit, extendDataItem(dataItem, subItemsField)]
+    });
+  };
 
-  //editCell  TreeListBooleanFilter, TreeListNumericFilter,TreeListDateFilter 
-  const columns: TreeListColumnProps[] = [
-    { field: 'name', title: 'Name', width: '280px', expandable: true, editCell: TreeListTextEditor, filterCell: TreeListTextFilter },
-    { field: 'position', title: 'Position', width: '260px', editCell: TreeListTextEditor },
-    { field: 'hireDate', title: 'Hire Date', format: '{0:d}', width: '170px', editCell: TreeListDateEditor },
-    { field: 'timeInPosition', title: 'Year(s) in Position', width: '170px', editCell: TreeListNumericEditor },
-    { field: 'fullTime', title: 'Full Time', width: '160px', editCell: TreeListBooleanEditor }
-  ];
+  const save = (dataItem: Employee) => {
+    const { isNew, inEdit, ...itemToSave } = dataItem;
+    setState({
+      ...state,
+      data: mapTree(state.data, subItemsField, (item) => (item.id === itemToSave.id ? itemToSave : item)),
+      inEdit: state.inEdit.filter((i) => i.id !== itemToSave.id)
+    });
+  };
+
+  const cancel = (editedItem: Employee) => {
+    const { inEdit, data } = state;
+    if (editedItem.isNew) {
+      return remove(editedItem);
+    }
+
+    setState({
+      ...state,
+      data: mapTree(data, subItemsField, (item) =>
+        item.id === editedItem.id ? inEdit.find((i) => i.id === item.id) : item
+      ),
+      inEdit: inEdit.filter((i) => i.id !== editedItem.id)
+    });
+  };
+
+  const remove = (dataItem: Employee) => {
+    setState({
+      ...state,
+      data: removeItems(state.data, subItemsField, (i) => i.id === dataItem.id),
+      inEdit: state.inEdit.filter((i) => i.id !== dataItem.id)
+    });
+  };
 
   const onExpandChange = (e: TreeListExpandChangeEvent) => {
     setState({
@@ -50,116 +96,67 @@ function TreeListEditing() {
     });
   };
 
-  const handleDataStateChange = (e: TreeListDataStateChangeEvent) => {
-    const next: DataState = {
-      ...e.dataState,
-      sort: e.dataState.sort ?? [],
-      filter: e.dataState.filter ?? [],
-    };
-
-    setState(prev => ({
-      ...prev,
-      dataState: next,
-    }));
-  }
-
-  //On edit
-  const onItemChange = (e: TreeListItemChangeEvent) => {
-    const field: any = e.field;
-    setState(prev => {
-      return {
-        ...prev, data: mapTree(prev.data, subItemsField,
-          (item) => item.id === e.dataItem.id ? extendDataItem(item, subItemsField, { [field]: e.value })
-            : item
-        )
-      }
-    })
-  }
-
-  const rowClick = (e: TreeListRowClickEvent) => {
+  const onItemChange = (event: TreeListItemChangeEvent) => {
+    const field: any = event.field;
     setState({
       ...state,
-      editId: state.editId === e.dataItem.id ? null : e.dataItem.id
+      data: mapTree(state.data, subItemsField, (item) =>
+        item.id === event.dataItem.id ? extendDataItem(item, subItemsField, { [field]: event.value }) : item
+      )
     });
   };
 
-  //Filter 
-  // const handleFilterChange = (e: TreeListFilterChangeEvent) => {
-  // const updateFilter = { ...state.dataState, filter: e.filter }
-  // setState({ ...state, ...updateFilter });
-  // };
-
-  const enterEdit = (dataItem: Employee, field: string) => {
+  const addRecord = () => {
+    const newRecord: { id: number; isNew: boolean } = createNewItem();
     setState({
       ...state,
-      editItem: { ...dataItem },
-      editItemField: field
-    });
-  };
-  const exitEdit = () => {
-    setState({
-      ...state,
-      editItem: undefined,
-      editItemField: undefined
+      data: [newRecord as any, ...state.data],
+      inEdit: [...state.inEdit, { ...newRecord }]
     });
   };
 
-  const cancelChanges = () => {
-    setState({
-      ...state,
-      data: [...employeesTreeList],
-      editItem: undefined,
-      editItemField: undefined,
-      changes: false
-    });
+  const createNewItem = () => {
+    const timestamp: number = new Date().getTime();
+    return { id: timestamp, isNew: true };
   };
 
-  const { data, changes, expanded, editItem, editItemField } = state;
+  const CommandCell = MyCommandCell(enterEdit, remove, save, cancel, addChild, editField);
 
-  renderers = createRenderers(enterEdit, exitEdit, editField);
+  const columns: Array<TreeListColumnProps | {}> = [
+    { field: 'name', title: 'Name', width: '280px', editCell: TreeListTextEditor, expandable: true },
+    { field: 'position', title: 'Position', width: '260px', editCell: TreeListTextEditor },
+    { field: 'fullTime', title: 'Full Time', width: '160px', editCell: TreeListBooleanEditor },
+    { cell: CommandCell, width: '360px' }
+  ];
+
+  // console.log("statestate", state)
+
+  const { data, expanded, inEdit } = state;
 
   return (
-    <div>
-      <TreeList
-        style={{ maxHeight: '510px', overflow: 'auto' }}
-        expandField={expandField}
-        subItemsField={subItemsField}
-        onExpandChange={onExpandChange}
-        sortable={{ mode: 'multiple' }}
-        // sortable={true}
-        // {...state.dataState}
-        data={mapTree(data, subItemsField, (item) =>
-          extendDataItem(item, subItemsField, {
-            [expandField]: expanded.includes(item.id),
-            [editField]: item.id === editItem ? editItemField : undefined
-          })
-        )}
-        onDataStateChange={handleDataStateChange}
-        onItemChange={onItemChange}
-        columns={columns.map((column) => ({
-          ...column,
-          editCell: editItemField === column.field ? column.editCell : undefined
-        }))}
-        editField={editField}
-        resizable={true}
-        onRowClick={rowClick}
-        cellRender={renderers.cellRender}
-        // filterOperators={filterOperators}
-        // filter={state.dataState.filter}
-        // onFilterChange={handleFilterChange}
-        toolbar={
-          <TreeListToolbar>
-            <Button type="button" title="Save Changes" onClick={saveChanges} disabled={!changes}>
-              Save Changes
-            </Button>
-            <Button type="button" title="Cancel Changes" onClick={cancelChanges} disabled={!changes}>
-              Cancel Changes
-            </Button>
-          </TreeListToolbar>
-        }
-      />
-    </div>
-  )
-}
+    <TreeList
+      style={{ maxHeight: '510px', overflow: 'auto' }}
+      data={mapTree(data, subItemsField, (item) =>
+        extendDataItem(item, subItemsField, {
+          [expandField]: expanded.includes(item.id),
+          [editField]: Boolean(inEdit.find((i) => i.id === item.id))
+        })
+      )}
+      editField={editField}
+      expandField={expandField}
+      subItemsField={subItemsField}
+      onItemChange={onItemChange}
+      onExpandChange={onExpandChange}
+      columns={columns}
+      toolbar={
+        <TreeListToolbar>
+          <Button type="button" title="Add new" themeColor={'primary'} onClick={addRecord}>
+            Add new
+          </Button>
+        </TreeListToolbar>
+      }
+    />
+  );
+};
 
-export default TreeListEditing
+export default TreeListEditing;

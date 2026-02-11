@@ -6,8 +6,7 @@ const subItemsField: string = 'employees';
 const expandField: string = 'expanded';
 const editField: string = 'inEdit';
 
-// import type { GridFilterOperators } from '@progress/kendo-react-grid';
-// const filterOperators: GridFilterOperators = {
+// const filterOperators = {
 //   text: [{ text: 'grid.filterContainsOperator', operator: 'contains' }, { text: 'grid.filterNotContainsOperator', operator: 'doesnotcontain' }, { text: 'grid.filterEqOperator', operator: 'eq' },
 //   { text: 'grid.filterNotEqOperator', operator: 'neq' },
 //   { text: 'grid.filterStartsWithOperator', operator: 'startswith' },
@@ -50,10 +49,9 @@ function TreeListComponent() {
 
   //Data field 
   const processData = () => {
-    let { data, dataState } = state;
+    let { data, dataState, expanded } = state;
     let filteredData: Employee[] = filterBy(data, dataState.filter, subItemsField);
     let sortedData: Employee[] = orderBy(filteredData, dataState.sort, subItemsField);
-    let expanded: number[] = state.expanded;
 
     return mapTree(sortedData, subItemsField, (item) =>
       extendDataItem(item, subItemsField, {
@@ -105,8 +103,8 @@ function TreeListComponent() {
 
   //Filter 
   const handleFilterChange = (e: TreeListFilterChangeEvent) => {
-    const updateFilter = { ...state.dataState, filter: e.filter }
-    setState({ ...state, ...updateFilter });
+    // console.log("e",e.filter)
+    setState({ ...state, dataState: { ...state.dataState, filter: e.filter } });
   };
 
   return (
@@ -124,9 +122,9 @@ function TreeListComponent() {
       columns={columns}
       editField={editField}
       resizable={true}
-      onRowClick={rowClick}
-      // filterOperators={filterOperators}
+      onRowClick={rowClick}      
       filter={state.dataState.filter}
+      
       onFilterChange={handleFilterChange}
     />
     </div>

@@ -5,14 +5,14 @@ import { useSelectedKendo } from "../../features/KendoContext";
 export const kendoSidebarfieldList: any = {
     dataGrid: ["simple", "selectable", "filtering", "pagination", "sorting", "editing", "inline editing",
         "dialog Editing", "external form", "exporting", "grouping", "agg grouping", "column row"],
-    treeList: ["tree list", "pagination list", "tree Editing"]
+    treeList: ["tree listing", "tree pagination", "tree editing", "tree column", "tree selection", "tree dragdrop", "tree Virtualscroll"]
 };
 
 function Sidebar() {
     const { setSelectedKendo } = useSelectedKendo();
     const [expandHeader, setExpandHeader] = useState<string | null>(null);
     const [selectedChild, setSelectedChild] = useState<any>({
-        dataGrid: "simple", treeList: "tree list"
+        dataGrid: "simple", treeList: "tree listing"
     });
 
     const handleSelect = (headerVal: string, selected: string) => {
@@ -47,7 +47,7 @@ function Sidebar() {
                                 role="option"
                                 aria-selected={expandHeader === header}
                                 onClick={() => handleToggle(header)}
-                                className={`block w-[9rem] text-left p-1 mb-1 cursor-pointer 
+                                className={`block w-[12rem] text-left p-1 mb-1 cursor-pointer 
               focus:outline-none focus:ring-2 focus:ring-blue-400 rounded-sm
               ${expandHeader === header
                                         ? "bg-blue-700 text-white"
@@ -81,7 +81,7 @@ function Sidebar() {
                                     role="option"
                                     // aria-selected={selectedChild === itemValue}
                                     onClick={() => handleSelect(header, itemValue as string)}
-                                    className={`block w-[7rem] text-left p-1 ml-8 mb-1 p-0 cursor-pointer 
+                                    className={`block w-[10rem] text-left p-1 ml-8 mb-1 p-0 cursor-pointer 
                   focus:ring-1 focus:ring-blue-400 rounded-sm  
                   ${selectedChild[`${header}`] === itemValue
                                             ? "bg-blue-700 text-white"

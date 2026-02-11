@@ -2,6 +2,9 @@ import { lazy, Suspense } from 'react';
 import { useSelectedKendo } from '../features/KendoContext';
 import Loader from '../utils/SpinnerComponent';
 import ColumnRow from './columnRow/ColumnRow';
+import TreeSelection from './treeSelection/TreeSelection';
+import TreeDragDrop from './treeDragDrop/TreeDragDrop';
+import VirtualScrolling from './virtualScrolling/VirtualScrolling';
 
 const Pagination = lazy(() => import('./pagination/Pagination'));
 const SortingComponent = lazy(() => import('./sorting/SortingComponent'));
@@ -18,6 +21,7 @@ const Aggregategrouping = lazy(() => import('./aggregategrouping/Aggregategroupi
 const TreeListComponent = lazy(() => import('./treeList/TreeList'));
 const TreeListPagination = lazy(() => import('./treeListPagination/treeListPagination'));
 const TreeListEditing = lazy(() => import('./treeListEditing/TreeListEditing'));
+const TreeColumn = lazy(() => import('./treeColumn/TreeColumn'));
 
 function CombinedListComponent() {
     const { selectedKendo } = useSelectedKendo();
@@ -50,13 +54,22 @@ function CombinedListComponent() {
                 return <Aggregategrouping />
             case "column row":
                 return <ColumnRow />
+
             //below is Tree list
-            case "tree list":
+            case "tree listing":
                 return <TreeListComponent />
-            case "pagination list":
+            case "tree pagination":
                 return <TreeListPagination />
-            case "tree Editing":
+            case "tree editing":
                 return <TreeListEditing />
+            case "tree column":
+                return <TreeColumn />
+            case "tree selection":
+                return <TreeSelection />
+            case "tree dragdrop":
+                return <TreeDragDrop />
+            case "tree Virtualscroll":
+                return <VirtualScrolling />
             default:
                 break;
         }
