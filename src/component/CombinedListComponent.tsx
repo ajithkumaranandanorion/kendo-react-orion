@@ -1,10 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { useSelectedKendo } from '../features/KendoContext';
 import Loader from '../utils/SpinnerComponent';
-import ColumnRow from './columnRow/ColumnRow';
-import TreeSelection from './treeSelection/TreeSelection';
-import TreeDragDrop from './treeDragDrop/TreeDragDrop';
-import VirtualScrolling from './virtualScrolling/VirtualScrolling';
 
 const Pagination = lazy(() => import('./pagination/Pagination'));
 const SortingComponent = lazy(() => import('./sorting/SortingComponent'));
@@ -22,6 +18,11 @@ const TreeListComponent = lazy(() => import('./treeList/TreeList'));
 const TreeListPagination = lazy(() => import('./treeListPagination/treeListPagination'));
 const TreeListEditing = lazy(() => import('./treeListEditing/TreeListEditing'));
 const TreeColumn = lazy(() => import('./treeColumn/TreeColumn'));
+const VirtualScrolling = lazy(() => import('./virtualScrolling/VirtualScrolling'));
+const ColumnRow = lazy(() => import('./columnRow/ColumnRow'));
+const TreeSelection = lazy(() => import('./treeSelection/TreeSelection'));
+const TreeDragDrop = lazy(() => import('./treeDragDrop/TreeDragDrop'));
+
 
 function CombinedListComponent() {
     const { selectedKendo } = useSelectedKendo();
