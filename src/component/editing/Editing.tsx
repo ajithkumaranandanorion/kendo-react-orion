@@ -93,13 +93,35 @@ function Editing() {
                     </div>
                 </GridToolbar>
                 <GridColumn field="ProductID" title="ID" width={100} columnMenu={ColumnMenu} editable={false} />
-                <GridColumn field="ProductName" title="Name" width={"auto"} editor="text" />
+                <GridColumn field="ProductName" title="Name" width={"auto"} editor="text" cells={{data: customCell}} />
                 <GridColumn field="UnitPrice" title="Unit Price" width={100} editor="numeric" />
                 <GridColumn field="UnitsOnOrder" title="First Ordered On" width={100} editable={false} />
                 <GridColumn field="FirstOrderedOn" title="First Ordered" width={100} cells={{ data: CustomDataCell }} editable={false} />
             </Grid>
         </div>
     )
+}
+
+const customCell = (props: any) => {
+    const { field, dataItem } = props;
+    if (field === "ProductName") {
+        return (<td>
+                <input
+                    className="k-textbox"
+                    value={dataItem[field] || ''}
+                    onChange={(e) => {
+                        const newValue = e.target.value;
+                        props.onChange({
+                            dataItem,
+                            field,
+                            value: newValue
+                        });
+                    }}
+                />
+            </td>
+        );
+    }   
+    return <CustomDataCell {...props} />;
 }
 
 export default Editing

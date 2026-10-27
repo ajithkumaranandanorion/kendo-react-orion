@@ -22,6 +22,7 @@ const VirtualScrolling = lazy(() => import('./virtualScrolling/VirtualScrolling'
 const ColumnRow = lazy(() => import('./columnRow/ColumnRow'));
 const TreeSelection = lazy(() => import('./treeSelection/TreeSelection'));
 const TreeDragDrop = lazy(() => import('./treeDragDrop/TreeDragDrop'));
+const MergeRow = lazy(() => import('./mergeRow/MergeRow'));
 
 
 function CombinedListComponent() {
@@ -55,6 +56,8 @@ function CombinedListComponent() {
                 return <Aggregategrouping />
             case "column row":
                 return <ColumnRow />
+            case "Two Row merge":
+                return <MergeRow />
 
             //below is Tree list
             case "tree listing":

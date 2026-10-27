@@ -4,7 +4,7 @@ import { useSelectedKendo } from "../../features/KendoContext";
 
 export const kendoSidebarfieldList: any = {
     dataGrid: ["simple", "selectable", "filtering", "pagination", "sorting", "editing", "inline editing",
-        "dialog Editing", "external form", "exporting", "grouping", "agg grouping", "column row"],
+        "dialog Editing", "external form", "exporting", "grouping", "agg grouping", "column row", "Two Row merge"],
     treeList: ["tree listing", "tree pagination", "tree editing", "tree column", "tree selection", "tree dragdrop", "tree Virtualscroll"]
 };
 

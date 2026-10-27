@@ -1,0 +1,8 @@
+.detail-inner-grid .k-grid-header {
+    display: none;
+}
+.detail-inner-grid .k-grid-table td,
+.detail-inner-grid .k-grid-table th {
+    width: calc(100% / 2.5);
+    border-color: #ddd;
+}
